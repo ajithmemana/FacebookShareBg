@@ -1,0 +1,153 @@
+package com.gfr.salandroid.faceBookShare;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.facebook.android.DialogError;
+import com.facebook.android.Facebook;
+import com.facebook.android.Facebook.DialogListener;
+import com.facebook.android.FacebookError;
+
+public class ShareONFaceBook {
+	private Facebook facebook;
+	private static final String APP_ID = "230664020390069";
+
+	private static final String[] PERMISSIONS = new String[] { "publish_stream" };
+	private static final String TOKEN = "access_token";
+	private static final String EXPIRES = "expires_in";
+	private static final String KEY = "facebook-credentials";
+	Handler mRunOnUi = new Handler();
+	public static final String actionPost = "post";
+	public static final String actionGetUsername = "getUsername";
+	Context context;
+	Bundle bundle;
+	String action;
+	private FacebookResponseListener listener;
+
+	public ShareONFaceBook(Context context, 
+			FacebookResponseListener listener, String action) {
+		this.context = context;
+		//this.bundle = bundle;
+		this.listener = listener;
+		this.action = action;
+		facebook = new Facebook(APP_ID);
+	}
+
+	public interface FacebookResponseListener {
+
+		public void onFaceBookResponse();
+	}
+
+	public void postToWall(String message, Bundle bundle) {
+		this.bundle = bundle;
+
+		if (!facebook.isSessionValid()) {
+			loginAndPostToWall();
+			
+
+		} else {
+			try {
+				facebook.request("me");
+				String response = facebook.request("me/feed", bundle,
+						"POST");
+				Log.d("Tests", "got response: " + response);
+				if (response == null || response.equals("")
+						|| response.equals("false")) {
+					 showToast("Blank response.");
+				} else {
+					 showToast("Message posted to your facebook wall!");
+				}
+				// finish();
+			} catch (Exception e) {
+				// showToast("Failed to post to wall!");
+				e.printStackTrace();
+				// finish();
+			}
+		}
+
+	}
+
+	public void loginAndPostToWall() {
+		facebook.authorize((Activity) context, PERMISSIONS,
+				Facebook.FORCE_DIALOG_AUTH, new LoginDialogListener());
+	}
+
+	class LoginDialogListener implements DialogListener {
+		public void onComplete(Bundle values) {
+
+			Thread t = new Thread() {
+				public void run() {
+					try {
+						facebook.request("me");
+						String response = facebook.request("me/feed",
+								bundle, "POST");
+						Log.d("Tests", "got response: " + response);
+						if (response == null || response.equals("")
+								|| response.equals("false")) {
+							// showToast("Blank response.");
+						} else {
+							showToast("Link posted to your facebook wall!");
+						}
+						// finish();
+					} catch (Exception e) {
+						// showToast("Failed to post to wall!");
+						e.printStackTrace();
+						// finish();
+					}
+
+				}
+			};
+			t.start();
+
+			// saveCredentials(facebook);
+			// if (bundle != null) {
+			// if (action.equalsIgnoreCase(ShareOnFacebook.actionPost)) {
+			// postToWall(bundle);
+			// } else if
+			// (action.equalsIgnoreCase(ShareOnFacebook.actionGetUsername)) {
+			// //getUsernameAndPhoto();
+			// }
+			// listener.onFaceBookResponse();
+			//
+			// }
+		}
+
+		public void onFacebookError(FacebookError error) {
+			showToast("Authentication with Facebook failed!");
+			listener.onFaceBookResponse();
+
+		}
+
+		public void onError(DialogError error) {
+			showToast("Authentication with Facebook failed!");
+			listener.onFaceBookResponse();
+
+		}
+
+		public void onCancel() {
+			showToast("Authentication with Facebook cancelled!");
+			// if(FacebookPostPreviewActivity.facebookHandler != null) {
+			// FacebookPostPreviewActivity.facebookHandler.
+			// obtainMessage(FacebookPostPreviewActivity.CLOSE_PREVIEW).sendToTarget();
+			// }
+			// listener.onFaceBookResponse();
+		}
+
+	}
+
+	private void showToast(final String message) {
+		Activity activity = (Activity) context;
+		activity.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				Toast.makeText(context.getApplicationContext(), message,
+						Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+}

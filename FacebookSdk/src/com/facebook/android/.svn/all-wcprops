@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/batch5/!svn/ver/509/trunk/ajitha/FacebookSdk/src/com/facebook/android
+END
+SessionEvents.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/batch5/!svn/ver/509/trunk/ajitha/FacebookSdk/src/com/facebook/android/SessionEvents.java
+END
+BaseRequestListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/batch5/!svn/ver/509/trunk/ajitha/FacebookSdk/src/com/facebook/android/BaseRequestListener.java
+END
+DialogError.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/batch5/!svn/ver/509/trunk/ajitha/FacebookSdk/src/com/facebook/android/DialogError.java
+END
+Facebook.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/batch5/!svn/ver/509/trunk/ajitha/FacebookSdk/src/com/facebook/android/Facebook.java
+END
+Util.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/batch5/!svn/ver/509/trunk/ajitha/FacebookSdk/src/com/facebook/android/Util.java
+END
+BaseDialogListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/batch5/!svn/ver/509/trunk/ajitha/FacebookSdk/src/com/facebook/android/BaseDialogListener.java
+END
+SessionStore.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/batch5/!svn/ver/509/trunk/ajitha/FacebookSdk/src/com/facebook/android/SessionStore.java
+END
+AsyncFacebookRunner.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/batch5/!svn/ver/509/trunk/ajitha/FacebookSdk/src/com/facebook/android/AsyncFacebookRunner.java
+END
+FacebookError.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/batch5/!svn/ver/509/trunk/ajitha/FacebookSdk/src/com/facebook/android/FacebookError.java
+END
+FbDialog.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/batch5/!svn/ver/509/trunk/ajitha/FacebookSdk/src/com/facebook/android/FbDialog.java
+END
